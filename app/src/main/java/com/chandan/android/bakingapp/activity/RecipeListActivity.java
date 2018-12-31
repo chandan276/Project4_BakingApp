@@ -28,6 +28,8 @@ public class RecipeListActivity extends AppCompatActivity implements RecipeListA
 
     private List<BakingData> bakingData = new ArrayList<>();
 
+    private static final String RESPONSE_CALLBACKS_TEXT_KEY = "callbacks";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +39,23 @@ public class RecipeListActivity extends AppCompatActivity implements RecipeListA
 
         initializeUI();
 
-        getBakingRecipeData();
+        if (savedInstanceState != null) {
+            if (savedInstanceState.containsKey(RESPONSE_CALLBACKS_TEXT_KEY)) {
+                bakingData.clear();
+                bakingData = savedInstanceState.getParcelableArrayList(RESPONSE_CALLBACKS_TEXT_KEY);
+                updateAdapter();
+            } else {
+                getBakingRecipeData();
+            }
+        } else {
+            getBakingRecipeData();
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList(RESPONSE_CALLBACKS_TEXT_KEY, new ArrayList<BakingData>(bakingData));
     }
 
     private void initializeUI() {
@@ -59,7 +77,7 @@ public class RecipeListActivity extends AppCompatActivity implements RecipeListA
             public void onResponse(@NonNull Call<List<BakingData>> call, @NonNull Response<List<BakingData>> response) {
                 if (response.body() != null) {
                     bakingData = response.body();
-                    mAdapter.updateBakingListData(bakingData);
+                    updateAdapter();
                 } else {
                     showToastMessage(getString(R.string.network_error));
                 }
@@ -72,6 +90,10 @@ public class RecipeListActivity extends AppCompatActivity implements RecipeListA
                 showToastMessage(t.getLocalizedMessage());
             }
         });
+    }
+
+    private void updateAdapter() {
+        mAdapter.updateBakingListData(bakingData);
     }
 
     private void showToastMessage(String message) {
