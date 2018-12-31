@@ -1,7 +1,6 @@
 package com.chandan.android.bakingapp.rest;
 
 import com.chandan.android.bakingapp.model.BakingData;
-import com.chandan.android.bakingapp.model.BakingDataResponse;
 
 import java.util.List;
 
