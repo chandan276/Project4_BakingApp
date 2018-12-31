@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">BakingApp</string>
+
+    <!--Screens Title-->
+    <string name="recipe_list_activity_screen_title">Baking Time</string>
+
+    <!--Progress Indicator String-->
+    <string name="progress_indicator_home_label">Please wait</string>
+    <string name="progress_indicator_home_detail_label">Downloading data</string>
+
+    <!--Network Error-->
+    <string name="network_error">Cannot fetch result at this time. Please try again later.</string>
+</resources>
