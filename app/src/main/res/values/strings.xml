@@ -10,4 +10,7 @@
 
     <!--Network Error-->
     <string name="network_error">Cannot fetch result at this time. Please try again later.</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -1,5 +1,7 @@
 package com.chandan.android.bakingapp.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -102,6 +104,12 @@ public class RecipeListActivity extends AppCompatActivity implements RecipeListA
 
     @Override
     public void onRecipeItemClick(int clickedItemIndex) {
-        Log.d("dklavs", "asfad");
+
+        Context context = RecipeListActivity.this;
+        Class destinationActivity = RecipeStepsMasterActivity.class;
+        Intent intent = new Intent(context, destinationActivity);
+        BakingData bakingData = this.bakingData.get(clickedItemIndex);
+        intent.putExtra(Intent.EXTRA_TEXT, bakingData);
+        startActivity(intent);
     }
 }
