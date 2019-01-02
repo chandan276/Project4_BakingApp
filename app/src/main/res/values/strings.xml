@@ -11,6 +11,12 @@
     <!--Network Error-->
     <string name="network_error">Cannot fetch result at this time. Please try again later.</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--Strings-->
+    <string name="indredigents_title">Ingredients:</string>
+    <string name="step_description_na">Step description not available</string>
+    <string name="click_listner_implementation">must implement ClickListener</string>
+
+    <!--Image content description-->
+    <string name="video_preview_image_description">Video Preview Image</string>
+
 </resources>

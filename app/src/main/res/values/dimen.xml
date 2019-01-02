@@ -8,9 +8,14 @@
 
     <!--CardView's TextView Dimen-->
     <dimen name="recipe_card_view_text_margin">20dp</dimen>
-    <dimen name="recipe_card_view_text_size">25sp</dimen>
+    <dimen name="recipe_card_view_text_size">20sp</dimen>
 
     <!--Recipe Steps Fragment TextView Dimen-->
     <dimen name="recipe_steps_Fragment_text_margin">15dp</dimen>
-    <dimen name="recipe_steps_Fragment_text_size">20sp</dimen>
+    <dimen name="recipe_steps_Fragment_text_size">15sp</dimen>
+
+    <!--Recipe Detail Fragment Dimen-->
+    <dimen name="video_preview_image_height">200dp</dimen>
+    <dimen name="contents_margin">10dp</dimen>
+    <dimen name="recipe_detail_Fragment_text_size">15sp</dimen>
 </resources>
