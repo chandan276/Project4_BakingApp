@@ -2,6 +2,7 @@ package com.chandan.android.bakingapp.fragment;
 
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.chandan.android.bakingapp.R;
 import com.chandan.android.bakingapp.activity.RecipeStepsDetailActivity;
+import com.chandan.android.bakingapp.databinding.FragmentRecipeDetailBinding;
 import com.chandan.android.bakingapp.model.RecipeStepsData;
 import com.squareup.picasso.Picasso;
 
@@ -39,19 +41,11 @@ public class RecipeDetailFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_recipe_detail, container, false);
+        FragmentRecipeDetailBinding binding = DataBindingUtil.inflate(
+                inflater, R.layout.fragment_recipe_detail, container, false);
+        View rootView = binding.getRoot();
 
-        final ImageView imageView = (ImageView) rootView.findViewById(R.id.video_preview_imageview);
-        final TextView textView = (TextView) rootView.findViewById(R.id.recipe_detail_text_view);
-
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (recipeStepsData != null) {
-                    mCallback.onImageViewSelected(recipeStepsData.getStepVideoUrl());
-                }
-            }
-        });
+        binding.setRecipestepsdata(recipeStepsData);
 
         if (recipeStepsData != null) {
             String path = DUMMY_IMAGE_PATH;
@@ -62,10 +56,17 @@ public class RecipeDetailFragment extends Fragment {
                     .load(path)
                     .placeholder(R.drawable.preview_not_available)
                     .error(R.drawable.preview_not_available)
-                    .into(imageView);
-
-            textView.setText(recipeStepsData.getStepDescription());
+                    .into(binding.videoPreviewImageview);
         }
+
+        binding.videoPreviewImageview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (recipeStepsData != null) {
+                    mCallback.onImageViewSelected(recipeStepsData.getStepVideoUrl());
+                }
+            }
+        });
 
         return rootView;
     }

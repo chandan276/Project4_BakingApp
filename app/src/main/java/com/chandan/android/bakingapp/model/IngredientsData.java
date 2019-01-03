@@ -1,11 +1,13 @@
 package com.chandan.android.bakingapp.model;
 
+import android.databinding.BaseObservable;
+import android.databinding.Bindable;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
-public class IngredientsData implements Parcelable {
+public class IngredientsData extends BaseObservable implements Parcelable {
 
     private final static String Ingredients_Quantity = "quantity";
     private final static String Ingredients_Measure = "measure";
@@ -46,6 +48,7 @@ public class IngredientsData implements Parcelable {
         }
     };
 
+    @Bindable
     public double getIngredientsQuatity() {
         return ingredientsQuatity;
     }
@@ -54,6 +57,7 @@ public class IngredientsData implements Parcelable {
         this.ingredientsQuatity = ingredientsQuatity;
     }
 
+    @Bindable
     public String getIngredientsMeasure() {
         return ingredientsMeasure;
     }
@@ -62,6 +66,7 @@ public class IngredientsData implements Parcelable {
         this.ingredientsMeasure = ingredientsMeasure;
     }
 
+    @Bindable
     public String getIngredientsName() {
         return ingredientsName;
     }

@@ -1,6 +1,8 @@
 package com.chandan.android.bakingapp.adapter;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.chandan.android.bakingapp.R;
+import com.chandan.android.bakingapp.databinding.RecipeListCardviewBinding;
 import com.chandan.android.bakingapp.model.BakingData;
 
 import java.util.ArrayList;
@@ -16,6 +19,7 @@ import java.util.List;
 public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.RecipeViewHolder> {
 
     final private RecipeItemClickListener mOnClickListener;
+    private LayoutInflater layoutInflater;
 
     private List<BakingData> recipeDataList = new ArrayList<>();
 
@@ -34,21 +38,27 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
 
     @Override
     public RecipeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
-        int layoutIdForListItem = R.layout.recipe_list_cardview;
+        if (layoutInflater == null) {
+            layoutInflater = LayoutInflater.from(parent.getContext());
+        }
 
-        LayoutInflater inflater = LayoutInflater.from(context);
-
-        View view = inflater.inflate(layoutIdForListItem, parent, false);
-
-        return new RecipeViewHolder(view);
+        RecipeListCardviewBinding binding =
+                DataBindingUtil.inflate(layoutInflater, R.layout.recipe_list_cardview, parent, false);
+        return new RecipeViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(RecipeViewHolder holder, int position) {
-        BakingData bakingData = recipeDataList.get(position);
-        holder.recipeNameTextView.setText(bakingData.getRecipeName());
-        holder.bind(position);
+    public void onBindViewHolder(RecipeViewHolder holder, final int position) {
+        holder.binding.setBakingdata(recipeDataList.get(position));
+
+        holder.binding.recipeNameTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mOnClickListener != null) {
+                    mOnClickListener.onRecipeItemClick(position);
+                }
+            }
+        });
     }
 
     @Override
@@ -56,24 +66,13 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         return recipeDataList.size();
     }
 
-    class RecipeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class RecipeViewHolder extends RecyclerView.ViewHolder {
 
-        TextView recipeNameTextView;
+        private final RecipeListCardviewBinding binding;
 
-        RecipeViewHolder(View itemView) {
-            super(itemView);
-            recipeNameTextView = (TextView) itemView.findViewById(R.id.recipe_name_text_view);
-            itemView.setOnClickListener(this);
-        }
-
-        void bind(int listIndex) {
-
-        }
-
-        @Override
-        public void onClick(View v) {
-            int clickedPosition = getAdapterPosition();
-            mOnClickListener.onRecipeItemClick(clickedPosition);
+        RecipeViewHolder(RecipeListCardviewBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
     }
 }

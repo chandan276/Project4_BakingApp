@@ -1,6 +1,7 @@
 package com.chandan.android.bakingapp.fragment;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.chandan.android.bakingapp.R;
+import com.chandan.android.bakingapp.databinding.ActivityRecipeStepsDetailBinding;
+import com.chandan.android.bakingapp.databinding.FragmentRecipeDetailBinding;
 
 public class RecipeStepsFragment extends Fragment {
 

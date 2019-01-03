@@ -1,25 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".fragment.RecipeDetailFragment">
 
-    <ImageView
-        android:id="@+id/video_preview_imageview"
+<layout xmlns:bind="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="recipestepsdata"
+            type="com.chandan.android.bakingapp.model.RecipeStepsData" />
+    </data>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/video_preview_image_height"
-        android:contentDescription="@string/video_preview_image_description"
-        android:layout_margin="@dimen/contents_margin"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".fragment.RecipeDetailFragment">
 
-    <TextView
-        android:id="@+id/recipe_detail_text_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
-        android:textColor="@color/default_textColor"
-        android:layout_margin="@dimen/contents_margin"
-        android:textSize="@dimen/recipe_detail_Fragment_text_size"/>
+        <ImageView
+            android:id="@+id/video_preview_imageview"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/video_preview_image_height"
+            android:layout_margin="@dimen/contents_margin"
+            android:contentDescription="@string/video_preview_image_description" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/recipe_detail_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/contents_margin"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/default_textColor"
+            android:textSize="@dimen/recipe_detail_Fragment_text_size"
+            android:text="@{recipestepsdata.stepDescription}"/>
+
+    </LinearLayout>
+</layout>

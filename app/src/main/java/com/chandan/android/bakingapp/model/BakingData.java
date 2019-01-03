@@ -1,5 +1,7 @@
 package com.chandan.android.bakingapp.model;
 
+import android.databinding.BaseObservable;
+import android.databinding.Bindable;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -7,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class BakingData implements Parcelable {
+public class BakingData extends BaseObservable implements Parcelable {
 
     private final static String Recipe_Id = "id";
     private final static String Recipe_Name = "name";
@@ -78,6 +80,7 @@ public class BakingData implements Parcelable {
         this.recipeId = recipeId;
     }
 
+    @Bindable
     public String getRecipeName() {
         return recipeName;
     }
@@ -94,6 +97,7 @@ public class BakingData implements Parcelable {
         this.recipeTotalServings = recipeTotalServings;
     }
 
+    @Bindable
     public String getRecipeImagePath() {
         return recipeImagePath;
     }

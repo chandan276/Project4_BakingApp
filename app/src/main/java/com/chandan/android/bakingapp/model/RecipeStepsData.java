@@ -1,11 +1,17 @@
 package com.chandan.android.bakingapp.model;
 
+import android.databinding.BaseObservable;
+import android.databinding.Bindable;
+import android.databinding.BindingAdapter;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.widget.ImageView;
 
+import com.chandan.android.bakingapp.R;
 import com.google.gson.annotations.SerializedName;
+import com.squareup.picasso.Picasso;
 
-public class RecipeStepsData implements Parcelable {
+public class RecipeStepsData extends BaseObservable implements Parcelable {
 
     private final static String Step_Id = "id";
     private final static String Step_ShortDescription = "shortDescription";
@@ -70,6 +76,7 @@ public class RecipeStepsData implements Parcelable {
         this.stepId = stepId;
     }
 
+    @Bindable
     public String getStepShortDescription() {
         return stepShortDescription;
     }
@@ -78,6 +85,7 @@ public class RecipeStepsData implements Parcelable {
         this.stepShortDescription = stepShortDescription;
     }
 
+    @Bindable
     public String getStepDescription() {
         return stepDescription;
     }
@@ -86,6 +94,7 @@ public class RecipeStepsData implements Parcelable {
         this.stepDescription = stepDescription;
     }
 
+    @Bindable
     public String getStepVideoUrl() {
         return stepVideoUrl;
     }
@@ -94,6 +103,7 @@ public class RecipeStepsData implements Parcelable {
         this.stepVideoUrl = stepVideoUrl;
     }
 
+    @Bindable
     public String getStepThumbnailUrl() {
         return stepThumbnailUrl;
     }
