@@ -1,7 +1,10 @@
 package com.chandan.android.bakingapp.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -26,7 +29,7 @@ import retrofit2.Response;
 
 public class RecipeListActivity extends AppCompatActivity implements RecipeListAdapter.RecipeItemClickListener {
 
-    private static final int GRID_SPAN = 1;
+    private static int GRID_SPAN = 1;
     private RecipeListAdapter mAdapter;
 
     private List<BakingData> bakingData = new ArrayList<>();
@@ -61,7 +64,22 @@ public class RecipeListActivity extends AppCompatActivity implements RecipeListA
         outState.putParcelableArrayList(RESPONSE_CALLBACKS_TEXT_KEY, new ArrayList<BakingData>(bakingData));
     }
 
+    private void setGridSpan() {
+        if (getResources().getBoolean(R.bool.portrait_only)) {
+            int orientation = this.getResources().getConfiguration().orientation;
+            if(orientation == Configuration.ORIENTATION_PORTRAIT) {
+                GRID_SPAN = 1;
+            } else {
+                GRID_SPAN = 3;
+            }
+        } else {
+            GRID_SPAN = 3;
+        }
+    }
+
     private void initializeUI() {
+        setGridSpan();
+
         RecyclerView mRecipeList = (RecyclerView) findViewById(R.id.recipe_recyclerview);
 
         GridLayoutManager layoutManager = new GridLayoutManager(this, GRID_SPAN);
@@ -74,7 +92,7 @@ public class RecipeListActivity extends AppCompatActivity implements RecipeListA
     }
 
     private void getBakingRecipeData() {
-        ProgressIndicatorHandler.showProgressIndicator(this, getString(R.string.progress_indicator_home_label), getString(R.string.progress_indicator_home_detail_label), true);
+        //ProgressIndicatorHandler.showProgressIndicator(this, getString(R.string.progress_indicator_home_label), getString(R.string.progress_indicator_home_detail_label), true);
         NetworkUtils.getBakingData(new Callback<List<BakingData>>() {
             @Override
             public void onResponse(@NonNull Call<List<BakingData>> call, @NonNull Response<List<BakingData>> response) {
@@ -84,12 +102,12 @@ public class RecipeListActivity extends AppCompatActivity implements RecipeListA
                 } else {
                     showToastMessage(getString(R.string.network_error));
                 }
-                ProgressIndicatorHandler.hideProgressIndicator();
+                //ProgressIndicatorHandler.hideProgressIndicator();
             }
 
             @Override
             public void onFailure(@NonNull Call<List<BakingData>> call, @NonNull Throwable t) {
-                ProgressIndicatorHandler.hideProgressIndicator();
+                //ProgressIndicatorHandler.hideProgressIndicator();
                 showToastMessage(t.getLocalizedMessage());
             }
         });
