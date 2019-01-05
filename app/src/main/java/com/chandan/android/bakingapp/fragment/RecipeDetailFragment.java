@@ -20,7 +20,7 @@ import com.squareup.picasso.Picasso;
 
 public class RecipeDetailFragment extends Fragment {
 
-    private static final String DUMMY_IMAGE_PATH = "https://www.google.com";
+    public static final String RECIPE_LIST_KEY = "recipe_list_key";
 
     private RecipeStepsData recipeStepsData = null;
 
@@ -41,23 +41,15 @@ public class RecipeDetailFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+        if (savedInstanceState != null) {
+            recipeStepsData = savedInstanceState.getParcelable(RECIPE_LIST_KEY);
+        }
+
         FragmentRecipeDetailBinding binding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_recipe_detail, container, false);
         View rootView = binding.getRoot();
 
         binding.setRecipestepsdata(recipeStepsData);
-
-        if (recipeStepsData != null) {
-            String path = DUMMY_IMAGE_PATH;
-            if (recipeStepsData.getStepThumbnailUrl().length() != 0) {
-                path = recipeStepsData.getStepThumbnailUrl();
-            }
-            Picasso.with(container.getContext())
-                    .load(path)
-                    .placeholder(R.drawable.preview_not_available)
-                    .error(R.drawable.preview_not_available)
-                    .into(binding.videoPreviewImageview);
-        }
 
         binding.videoPreviewImageview.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,5 +75,10 @@ public class RecipeDetailFragment extends Fragment {
             throw new ClassCastException(context.toString()
                     + " must implement OnImageClickListener");
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle currentState) {
+        currentState.putParcelable(RECIPE_LIST_KEY, recipeStepsData);
     }
 }

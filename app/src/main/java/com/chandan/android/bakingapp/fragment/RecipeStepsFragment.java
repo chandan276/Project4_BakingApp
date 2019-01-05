@@ -14,10 +14,12 @@ import android.widget.TextView;
 import com.chandan.android.bakingapp.R;
 import com.chandan.android.bakingapp.databinding.ActivityRecipeStepsDetailBinding;
 import com.chandan.android.bakingapp.databinding.FragmentRecipeDetailBinding;
+import com.chandan.android.bakingapp.databinding.FragmentRecipeStepsBinding;
 
 public class RecipeStepsFragment extends Fragment {
 
     public static final String LIST_TEXT_KEY = "list_text_key";
+    public static final String STEP_COUNT_KEY = "step_count_key";
 
     private String recipeStepsText;
     private Integer recipeStepCount;
@@ -38,16 +40,18 @@ public class RecipeStepsFragment extends Fragment {
 
         if (savedInstanceState != null) {
             recipeStepsText = savedInstanceState.getString(LIST_TEXT_KEY);
+            recipeStepCount = savedInstanceState.getInt(STEP_COUNT_KEY);
         }
 
-        View rootView = inflater.inflate(R.layout.fragment_recipe_steps, container, false);
-        final TextView textView = (TextView) rootView.findViewById(R.id.recipe_step_text_view);
+        FragmentRecipeStepsBinding binding = DataBindingUtil.inflate(
+                inflater, R.layout.fragment_recipe_steps, container, false);
+        View rootView = binding.getRoot();
 
         if (recipeStepsText != null) {
-            textView.setText(recipeStepsText);
+            binding.recipeStepTextView.setText(recipeStepsText);
         }
 
-        textView.setOnClickListener(new View.OnClickListener() {
+        binding.recipeStepTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mCallback.onTextViewSelected(recipeStepCount);
@@ -68,6 +72,7 @@ public class RecipeStepsFragment extends Fragment {
     @Override
     public void onSaveInstanceState(@NonNull Bundle currentState) {
         currentState.putCharSequence(LIST_TEXT_KEY, recipeStepsText);
+        currentState.putInt(STEP_COUNT_KEY, recipeStepCount);
     }
 
     @Override

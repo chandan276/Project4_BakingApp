@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:bind="http://schemas.android.com/apk/res/android">
+<layout xmlns:bind="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
             name="bakingdata"
@@ -20,6 +21,15 @@
         card_view:cardCornerRadius="@dimen/recipe_card_view_corner_radius"
         card_view:cardElevation="@dimen/recipe_card_view_elevation"
         card_view:cardUseCompatPadding="true">
+
+        <ImageView
+            android:id="@+id/video_preview_imageview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/cardview_image_description"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            app:recipeImagePath="@{bakingdata.recipeImagePath}"/>
 
         <TextView
             android:id="@+id/recipe_name_text_view"

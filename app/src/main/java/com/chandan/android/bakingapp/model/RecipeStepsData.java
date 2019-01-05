@@ -19,6 +19,8 @@ public class RecipeStepsData extends BaseObservable implements Parcelable {
     private final static String Step_VideoUrl = "videoURL";
     private final static String Step_ThumbnailUrl = "thumbnailURL";
 
+    private static final String DUMMY_IMAGE_PATH = "https://www.google.com";
+
     @SerializedName(Step_Id)
     private Integer stepId;
 
@@ -110,6 +112,19 @@ public class RecipeStepsData extends BaseObservable implements Parcelable {
 
     public void setStepThumbnailUrl(String stepThumbnailUrl) {
         this.stepThumbnailUrl = stepThumbnailUrl;
+    }
+
+    @BindingAdapter({"bind:stepThumbnailUrl"})
+    public static void loadImage(ImageView view, String imageUrl) {
+        String path = DUMMY_IMAGE_PATH;
+        if (imageUrl.length() != 0) {
+            path = imageUrl;
+        }
+        Picasso.with(view.getContext())
+                .load(path)
+                .placeholder(R.drawable.preview_not_available)
+                .error(R.drawable.preview_not_available)
+                .into(view);
     }
 
     @Override

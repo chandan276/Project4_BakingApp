@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:bind="http://schemas.android.com/apk/res/android">
+<layout xmlns:bind="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
@@ -16,12 +17,16 @@
         android:orientation="vertical"
         tools:context=".fragment.RecipeDetailFragment">
 
+        <!--TODO: Fix image movement with selection in tablet -->
         <ImageView
             android:id="@+id/video_preview_imageview"
             android:layout_width="match_parent"
             android:layout_height="@dimen/video_preview_image_height"
             android:layout_margin="@dimen/contents_margin"
-            android:contentDescription="@string/video_preview_image_description" />
+            android:contentDescription="@string/video_preview_image_description"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            app:stepThumbnailUrl="@{recipestepsdata.stepThumbnailUrl}"/>
 
         <TextView
             android:id="@+id/recipe_detail_text_view"
@@ -32,6 +37,8 @@
             android:textColor="@color/default_textColor"
             android:textSize="@dimen/recipe_detail_Fragment_text_size"
             android:text="@{recipestepsdata.stepDescription}"/>
+
+        <!--TODO: Put Next and Previous button -->
 
     </LinearLayout>
 </layout>

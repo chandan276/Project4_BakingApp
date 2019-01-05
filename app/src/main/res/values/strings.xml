@@ -14,9 +14,11 @@
     <!--Strings-->
     <string name="indredigents_title">Ingredients:</string>
     <string name="step_description_na">Step description not available</string>
+    <string name="video_url_na">Video not available for this step.</string>
     <string name="click_listner_implementation">must implement ClickListener</string>
 
     <!--Image content description-->
     <string name="video_preview_image_description">Video Preview Image</string>
+    <string name="cardview_image_description">Recipe Image</string>
 
 </resources>

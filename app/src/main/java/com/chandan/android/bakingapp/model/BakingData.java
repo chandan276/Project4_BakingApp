@@ -2,10 +2,14 @@ package com.chandan.android.bakingapp.model;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
+import android.databinding.BindingAdapter;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.widget.ImageView;
 
+import com.chandan.android.bakingapp.R;
 import com.google.gson.annotations.SerializedName;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -17,6 +21,8 @@ public class BakingData extends BaseObservable implements Parcelable {
     private final static String Recipe_Image_Path = "image";
     private final static String Recipe_Ingredients = "ingredients";
     private final static String Recipe_Steps = "steps";
+
+    private static final String DUMMY_IMAGE_PATH = "https://www.google.com";
 
     @SerializedName(Recipe_Id)
     private Integer recipeId;
@@ -104,6 +110,18 @@ public class BakingData extends BaseObservable implements Parcelable {
 
     public void setRecipeImagePath(String recipeImagePath) {
         this.recipeImagePath = recipeImagePath;
+    }
+
+    @BindingAdapter({"bind:recipeImagePath"})
+    public static void loadImage(ImageView view, String imageUrl) {
+        String path = DUMMY_IMAGE_PATH;
+        if (imageUrl.length() != 0) {
+            path = imageUrl;
+        }
+
+        Picasso.with(view.getContext())
+                .load(path)
+                .into(view);
     }
 
     public List<IngredientsData> getRecipeIngredientsData() {

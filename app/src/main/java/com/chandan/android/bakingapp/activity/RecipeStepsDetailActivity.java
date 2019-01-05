@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toast;
+
 import com.chandan.android.bakingapp.R;
 import com.chandan.android.bakingapp.fragment.RecipeDetailFragment;
 import com.chandan.android.bakingapp.model.RecipeStepsData;
@@ -44,12 +46,20 @@ public class RecipeStepsDetailActivity extends AppCompatActivity implements Reci
         RecipeDetailFragment detailsFragment = new RecipeDetailFragment();
         detailsFragment.setRecipeStepsData(stepsData);
         fragmentManager.beginTransaction()
-                .add(R.id.root_layout, detailsFragment)
+                .add(R.id.root_layout_detail, detailsFragment)
                 .commit();
     }
 
     @Override
     public void onImageViewSelected(String urlString) {
-        //TODO: Open url string in Media Player
+        if (!urlString.equals("")) {
+            //TODO: Open url string in Media Player
+        } else {
+            showToastMessage(getString(R.string.video_url_na));
+        }
+    }
+
+    private void showToastMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 }
