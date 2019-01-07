@@ -19,7 +19,7 @@ import com.chandan.android.bakingapp.model.RecipeStepsData;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecipeStepsMasterActivity extends AppCompatActivity implements RecipeStepsFragment.OnTextViewClickListener, RecipeDetailFragment.OnImageViewClickListener {
+public class RecipeStepsMasterActivity extends AppCompatActivity implements RecipeStepsFragment.OnTextViewClickListener {
 
     private BakingData bakingData = null;
     private Integer stepsCount = 0;
@@ -184,15 +184,6 @@ public class RecipeStepsMasterActivity extends AppCompatActivity implements Reci
             Intent intent = new Intent(context, destinationActivity);
             intent.putExtras(bundle);
             startActivity(intent);
-        }
-    }
-
-    @Override
-    public void onImageViewSelected(String urlString) {
-        if (!urlString.equals("")) {
-            //TODO: Open url string in Media Player
-        } else {
-            showToastMessage(getString(R.string.video_url_na));
         }
     }
 

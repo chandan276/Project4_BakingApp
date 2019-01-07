@@ -3,20 +3,34 @@ package com.chandan.android.bakingapp.fragment;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.chandan.android.bakingapp.R;
-import com.chandan.android.bakingapp.activity.RecipeStepsDetailActivity;
 import com.chandan.android.bakingapp.databinding.FragmentRecipeDetailBinding;
 import com.chandan.android.bakingapp.model.RecipeStepsData;
-import com.squareup.picasso.Picasso;
+import com.google.android.exoplayer2.DefaultLoadControl;
+import com.google.android.exoplayer2.ExoPlayerFactory;
+import com.google.android.exoplayer2.LoadControl;
+import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
+import com.google.android.exoplayer2.source.ExtractorMediaSource;
+import com.google.android.exoplayer2.source.MediaSource;
+import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
+import com.google.android.exoplayer2.trackselection.TrackSelector;
+import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
+import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
+import com.google.android.exoplayer2.util.Util;
+
+import java.util.Objects;
 
 public class RecipeDetailFragment extends Fragment {
 
@@ -24,11 +38,8 @@ public class RecipeDetailFragment extends Fragment {
 
     private RecipeStepsData recipeStepsData = null;
 
-    OnImageViewClickListener mCallback;
-
-    public interface OnImageViewClickListener {
-        void onImageViewSelected(String urlString);
-    }
+    private SimpleExoPlayer mExoPlayer;
+    private SimpleExoPlayerView mPlayerView;
 
     public RecipeDetailFragment() {
         // Required empty public constructor
@@ -36,6 +47,28 @@ public class RecipeDetailFragment extends Fragment {
 
     public void setRecipeStepsData(RecipeStepsData recipeStepsData) {
         this.recipeStepsData = recipeStepsData;
+    }
+
+    private void initializePlayer(Uri mediaUri) {
+        if (mExoPlayer == null) {
+            TrackSelector trackSelector = new DefaultTrackSelector();
+            LoadControl loadControl = new DefaultLoadControl();
+            mExoPlayer = ExoPlayerFactory.newSimpleInstance(getContext(), trackSelector, loadControl);
+            mPlayerView.setPlayer(mExoPlayer);
+
+            String userAgent = Util.getUserAgent(getContext(), "ClassicalMusicQuiz");
+            MediaSource mediaSource = new ExtractorMediaSource(mediaUri, new DefaultDataSourceFactory(
+                    getContext(), userAgent), new DefaultExtractorsFactory(), null, null);
+
+            mExoPlayer.prepare(mediaSource);
+            mExoPlayer.setPlayWhenReady(true);
+        }
+    }
+
+    private void releasePlayer() {
+        mExoPlayer.stop();
+        mExoPlayer.release();
+        mExoPlayer = null;
     }
 
     @Override
@@ -51,34 +84,23 @@ public class RecipeDetailFragment extends Fragment {
 
         binding.setRecipestepsdata(recipeStepsData);
 
-        binding.videoPreviewImageview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (recipeStepsData != null) {
-                    mCallback.onImageViewSelected(recipeStepsData.getStepVideoUrl());
-                }
-            }
-        });
+        mPlayerView = binding.playerView;
+        binding.playerView.setDefaultArtwork(BitmapFactory.decodeResource
+                (getResources(), R.drawable.play_button_image));
+
+        initializePlayer(Uri.parse(recipeStepsData.getStepVideoUrl()));
 
         return rootView;
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-
-        // This makes sure that the host activity has implemented the callback interface
-        // If not, it throws an exception
-        try {
-            mCallback = (OnImageViewClickListener) context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString()
-                    + " must implement OnImageClickListener");
-        }
+    public void onSaveInstanceState(@NonNull Bundle currentState) {
+        currentState.putParcelable(RECIPE_LIST_KEY, recipeStepsData);
     }
 
     @Override
-    public void onSaveInstanceState(@NonNull Bundle currentState) {
-        currentState.putParcelable(RECIPE_LIST_KEY, recipeStepsData);
+    public void onDestroyView() {
+        super.onDestroyView();
+        releasePlayer();
     }
 }

@@ -92,6 +92,7 @@ public class RecipeListActivity extends AppCompatActivity implements RecipeListA
     }
 
     private void getBakingRecipeData() {
+        //TODO: Add progress indicator
         //ProgressIndicatorHandler.showProgressIndicator(this, getString(R.string.progress_indicator_home_label), getString(R.string.progress_indicator_home_detail_label), true);
         NetworkUtils.getBakingData(new Callback<List<BakingData>>() {
             @Override

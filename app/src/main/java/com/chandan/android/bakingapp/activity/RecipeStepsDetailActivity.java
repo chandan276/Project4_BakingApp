@@ -13,7 +13,7 @@ import com.chandan.android.bakingapp.model.RecipeStepsData;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecipeStepsDetailActivity extends AppCompatActivity implements RecipeDetailFragment.OnImageViewClickListener {
+public class RecipeStepsDetailActivity extends AppCompatActivity {
 
     private List<RecipeStepsData> recipeStepsDataList = null;
     private Integer recipeStepCurrentPosition = 0;
@@ -48,15 +48,6 @@ public class RecipeStepsDetailActivity extends AppCompatActivity implements Reci
         fragmentManager.beginTransaction()
                 .add(R.id.root_layout_detail, detailsFragment)
                 .commit();
-    }
-
-    @Override
-    public void onImageViewSelected(String urlString) {
-        if (!urlString.equals("")) {
-            //TODO: Open url string in Media Player
-        } else {
-            showToastMessage(getString(R.string.video_url_na));
-        }
     }
 
     private void showToastMessage(String message) {

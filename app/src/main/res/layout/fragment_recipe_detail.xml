@@ -17,16 +17,12 @@
         android:orientation="vertical"
         tools:context=".fragment.RecipeDetailFragment">
 
-        <!--TODO: Fix image movement with selection in tablet -->
-        <ImageView
-            android:id="@+id/video_preview_imageview"
+        <!--TODO: Fix Player movement with selection in tablet -->
+        <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+            android:id="@+id/player_view"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/video_preview_image_height"
-            android:layout_margin="@dimen/contents_margin"
-            android:contentDescription="@string/video_preview_image_description"
-            android:adjustViewBounds="true"
-            android:scaleType="fitCenter"
-            app:stepThumbnailUrl="@{recipestepsdata.stepThumbnailUrl}"/>
+            android:layout_height="200dp">
+        </com.google.android.exoplayer2.ui.SimpleExoPlayerView>
 
         <TextView
             android:id="@+id/recipe_detail_text_view"
