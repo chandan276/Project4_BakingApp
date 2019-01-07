@@ -1,12 +1,17 @@
 package com.chandan.android.bakingapp.adapter;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.chandan.android.bakingapp.R;
@@ -48,10 +53,13 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
     }
 
     @Override
-    public void onBindViewHolder(RecipeViewHolder holder, final int position) {
+    public void onBindViewHolder(final RecipeViewHolder holder, final int position) {
         holder.binding.setBakingdata(recipeDataList.get(position));
 
-        holder.binding.recipeNameTextView.setOnClickListener(new View.OnClickListener() {
+        String formattedText = "Servings: " + holder.binding.getBakingdata().getRecipeTotalServings();
+        holder.binding.recipeServingsTextView.setText(formattedText);
+
+        holder.binding.recipeCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mOnClickListener != null) {
@@ -59,11 +67,41 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
                 }
             }
         });
+
+        holder.binding.cardMenuImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPopupMenu(holder.binding.cardMenuImage);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return recipeDataList.size();
+    }
+
+    private void showPopupMenu(View view) {
+        // inflate menu
+        PopupMenu popup = new PopupMenu(view.getContext(), view);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.card_menu, popup.getMenu());
+        popup.setOnMenuItemClickListener(new MenuItemClickListener());
+        popup.show();
+    }
+
+    class MenuItemClickListener implements PopupMenu.OnMenuItemClickListener {
+
+        MenuItemClickListener() { }
+
+        @Override
+        public boolean onMenuItemClick(MenuItem menuItem) {
+            if (menuItem.getItemId() == R.id.action_card_menu) {
+                //TODO: Show ingredients in Widget
+                return true;
+            }
+            return false;
+        }
     }
 
     class RecipeViewHolder extends RecyclerView.ViewHolder {

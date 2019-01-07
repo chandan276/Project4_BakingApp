@@ -6,6 +6,7 @@ import android.databinding.BindingAdapter;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.chandan.android.bakingapp.R;
 import com.google.gson.annotations.SerializedName;
@@ -95,6 +96,7 @@ public class BakingData extends BaseObservable implements Parcelable {
         this.recipeName = recipeName;
     }
 
+    @Bindable
     public String getRecipeTotalServings() {
         return recipeTotalServings;
     }
@@ -121,6 +123,8 @@ public class BakingData extends BaseObservable implements Parcelable {
 
         Picasso.with(view.getContext())
                 .load(path)
+                .placeholder(R.drawable.preview_not_available)
+                .error(R.drawable.preview_not_available)
                 .into(view);
     }
 

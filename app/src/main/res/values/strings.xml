@@ -16,10 +16,13 @@
     <string name="step_description_na">Step description not available</string>
     <string name="video_url_na">Video not available for this step.</string>
     <string name="click_listner_implementation">must implement ClickListener</string>
+    <string name="servings_text">Servings:</string>
+    <string name="card_menu_text">Show Ingredients in Widget</string>
 
     <!--Image content description-->
     <string name="video_preview_image_description">Video Preview Image</string>
     <string name="cardview_image_description">Recipe Image</string>
+    <string name="cardview_menu_description">Menu Image</string>
 
     <!--Widget-->
     <string name="appwidget_text">EXAMPLE</string>

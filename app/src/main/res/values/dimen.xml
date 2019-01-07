@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--CardView Dimen-->
-    <dimen name="recipe_card_view_padding">10dp</dimen>
-    <dimen name="recipe_card_view_height">150dp</dimen>
+    <dimen name="card_margin">20dp</dimen>
+    <dimen name="recipe_card_view_height">200dp</dimen>
     <dimen name="recipe_card_view_corner_radius">4dp</dimen>
     <dimen name="recipe_card_view_elevation">5dp</dimen>
+    <dimen name="recipe_card_view_image_height">150dp</dimen>
 
     <!--CardView's TextView Dimen-->
-    <dimen name="recipe_card_view_text_margin">20dp</dimen>
-    <dimen name="recipe_card_view_text_size">20sp</dimen>
+    <dimen name="recipe_card_view_text_margin">10dp</dimen>
+    <dimen name="recipe_card_view_text_size">16sp</dimen>
+    <dimen name="recipe_card_view_servings_size">13sp</dimen>
+
+    <!--CardView's Menu Dimen-->
+
+    <dimen name="menu_dots_width">30dp</dimen>
+    <dimen name="menu_dots_height">30dp</dimen>
+    <dimen name="menu_top_margin">15dp</dimen>
 
     <!--Recipe Steps Fragment TextView Dimen-->
     <dimen name="recipe_steps_Fragment_text_margin">15dp</dimen>
