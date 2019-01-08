@@ -58,10 +58,6 @@ public class RecipeDetailFragment extends Fragment implements ExoPlayer.EventLis
 
     private SimpleExoPlayer mExoPlayer;
     private SimpleExoPlayerView mPlayerView;
-    private FrameLayout mFullScreenButton;
-    private ImageView mFullScreenIcon;
-    private boolean mExoPlayerFullscreen = false;
-    private Dialog mFullScreenDialog;
 
     private int mResumeWindow;
     private long mResumePosition;
@@ -84,7 +80,6 @@ public class RecipeDetailFragment extends Fragment implements ExoPlayer.EventLis
 
         if (savedInstanceState != null) {
             recipeStepsData = savedInstanceState.getParcelable(RECIPE_LIST_KEY);
-            mExoPlayerFullscreen = savedInstanceState.getBoolean(STATE_PLAYER_FULLSCREEN);
             mResumeWindow = savedInstanceState.getInt(STATE_RESUME_WINDOW);
             mResumePosition = savedInstanceState.getLong(STATE_RESUME_POSITION);
         }
@@ -106,9 +101,6 @@ public class RecipeDetailFragment extends Fragment implements ExoPlayer.EventLis
     public void onResume() {
         super.onResume();
 
-        initFullscreenDialog();
-        initFullscreenButton();
-
         String mediaUrlStr = "";
         if (recipeStepsData.getStepVideoUrl() != null && !recipeStepsData.getStepVideoUrl().equals("")) {
             mediaUrlStr = recipeStepsData.getStepVideoUrl();
@@ -121,19 +113,11 @@ public class RecipeDetailFragment extends Fragment implements ExoPlayer.EventLis
         }
 
         initializePlayer(Uri.parse(mediaUrlStr));
-
-        if (mExoPlayerFullscreen) {
-            ((ViewGroup) mPlayerView.getParent()).removeView(mPlayerView);
-            mFullScreenDialog.addContentView(mPlayerView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-            mFullScreenIcon.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_fullscreen_skrink));
-            mFullScreenDialog.show();
-        }
     }
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle currentState) {
         currentState.putParcelable(RECIPE_LIST_KEY, recipeStepsData);
-        currentState.putBoolean(STATE_PLAYER_FULLSCREEN, mExoPlayerFullscreen);
         currentState.putInt(STATE_RESUME_WINDOW, mResumeWindow);
         currentState.putLong(STATE_RESUME_POSITION, mResumePosition);
     }
@@ -148,9 +132,6 @@ public class RecipeDetailFragment extends Fragment implements ExoPlayer.EventLis
 
             mPlayerView.getPlayer().release();
         }
-
-        if (mFullScreenDialog != null)
-            mFullScreenDialog.dismiss();
     }
 
     @Override
@@ -169,7 +150,7 @@ public class RecipeDetailFragment extends Fragment implements ExoPlayer.EventLis
             mCallback = (MediaPlayerStateListener) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString()
-                    + " must implement OnImageClickListener");
+                    + " must implement MediaPlayerStateListener");
         }
     }
 
@@ -195,53 +176,6 @@ public class RecipeDetailFragment extends Fragment implements ExoPlayer.EventLis
             mExoPlayer.prepare(mediaSource);
             mExoPlayer.setPlayWhenReady(true);
         }
-    }
-
-    private void initFullscreenButton() {
-
-        PlaybackControlView controlView = mPlayerView.findViewById(R.id.exo_controller);
-        mFullScreenIcon = controlView.findViewById(R.id.exo_fullscreen_icon);
-        mFullScreenButton = controlView.findViewById(R.id.exo_fullscreen_button);
-        mFullScreenButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!mExoPlayerFullscreen)
-                    openFullscreenDialog();
-                else
-                    closeFullscreenDialog();
-            }
-        });
-    }
-
-    private void initFullscreenDialog() {
-
-        mFullScreenDialog = new Dialog(getContext(), android.R.style.Theme_Black_NoTitleBar_Fullscreen) {
-            public void onBackPressed() {
-                if (mExoPlayerFullscreen)
-                    closeFullscreenDialog();
-                super.onBackPressed();
-            }
-        };
-    }
-
-
-    private void openFullscreenDialog() {
-
-        ((ViewGroup) mPlayerView.getParent()).removeView(mPlayerView);
-        mFullScreenDialog.addContentView(mPlayerView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        mFullScreenIcon.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_fullscreen_skrink));
-        mExoPlayerFullscreen = true;
-        mFullScreenDialog.show();
-    }
-
-
-    private void closeFullscreenDialog() {
-
-        ((ViewGroup) mPlayerView.getParent()).removeView(mPlayerView);
-        //((FrameLayout) getView().findViewById(R.id.main_media_frame).
-        mExoPlayerFullscreen = false;
-        mFullScreenDialog.dismiss();
-        mFullScreenIcon.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_fullscreen_expand));
     }
 
     private void releasePlayer() {

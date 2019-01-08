@@ -13,7 +13,6 @@
     <dimen name="recipe_card_view_servings_size">13sp</dimen>
 
     <!--CardView's Menu Dimen-->
-
     <dimen name="menu_dots_width">30dp</dimen>
     <dimen name="menu_dots_height">30dp</dimen>
     <dimen name="menu_top_margin">15dp</dimen>

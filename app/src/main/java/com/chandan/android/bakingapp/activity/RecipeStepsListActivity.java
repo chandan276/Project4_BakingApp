@@ -9,6 +9,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.chandan.android.bakingapp.R;
 import com.chandan.android.bakingapp.adapter.RecipeListAdapter;
@@ -20,7 +21,7 @@ import com.chandan.android.bakingapp.model.RecipeStepsData;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecipeStepsListActivity extends AppCompatActivity implements RecipeStepsListAdapter.RecipeStepsClickListener {
+public class RecipeStepsListActivity extends AppCompatActivity implements RecipeStepsListAdapter.RecipeStepsClickListener, RecipeDetailFragment.MediaPlayerStateListener {
 
     private BakingData bakingData = null;
     private RecipeStepsListAdapter mAdapter;
@@ -153,5 +154,19 @@ public class RecipeStepsListActivity extends AppCompatActivity implements Recipe
             intent.putExtras(bundle);
             startActivity(intent);
         }
+    }
+
+    private void showToastMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onMediaPlayerError(String error) {
+        showToastMessage(error);
+    }
+
+    @Override
+    public void onMediaPlayerNoUrlAvailable() {
+        showToastMessage(getString(R.string.video_url_na));
     }
 }

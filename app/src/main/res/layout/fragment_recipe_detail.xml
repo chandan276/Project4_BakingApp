@@ -17,14 +17,20 @@
         android:orientation="vertical"
         tools:context=".fragment.RecipeDetailFragment">
 
-        <!--TODO: Fix Player movement with selection in tablet -->
-
-        <com.google.android.exoplayer2.ui.SimpleExoPlayerView
-            android:id="@+id/player_view"
+        <FrameLayout
+            android:id="@+id/main_media_frame"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/video_preview_image_height"
-            android:gravity="center">
-        </com.google.android.exoplayer2.ui.SimpleExoPlayerView>
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/contents_margin"
+            android:layout_weight="0.5"
+            android:background="#FFFFFF">
+
+            <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+                android:id="@+id/player_view"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/video_preview_image_height"
+                android:gravity="center"/>
+        </FrameLayout>
 
         <TextView
             android:id="@+id/recipe_detail_text_view"

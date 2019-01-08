@@ -20,7 +20,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.RecipeStepsMasterActivity" />
         <activity android:name=".activity.RecipeStepsDetailActivity" />
 
         <receiver android:name=".widget.RecipeIngredientWidget">
