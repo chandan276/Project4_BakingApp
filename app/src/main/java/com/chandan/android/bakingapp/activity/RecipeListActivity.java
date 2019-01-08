@@ -1,24 +1,20 @@
 package com.chandan.android.bakingapp.activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
-import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.chandan.android.bakingapp.R;
 import com.chandan.android.bakingapp.adapter.RecipeListAdapter;
 import com.chandan.android.bakingapp.model.BakingData;
 import com.chandan.android.bakingapp.utilities.NetworkUtils;
-import com.chandan.android.bakingapp.utilities.ProgressIndicatorHandler;
+import com.kaopiz.kprogresshud.KProgressHUD;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +29,11 @@ public class RecipeListActivity extends AppCompatActivity implements RecipeListA
     private RecipeListAdapter mAdapter;
 
     private List<BakingData> bakingData = new ArrayList<>();
+
+    private static final int ANIMATION_SPEED = 2;
+    private static final float DIMENSION = 0.5f;
+
+    private KProgressHUD progressIndicator;
 
     private static final String RESPONSE_CALLBACKS_TEXT_KEY = "callbacks";
 
@@ -92,8 +93,7 @@ public class RecipeListActivity extends AppCompatActivity implements RecipeListA
     }
 
     private void getBakingRecipeData() {
-        //TODO: Add progress indicator
-        //ProgressIndicatorHandler.showProgressIndicator(this, getString(R.string.progress_indicator_home_label), getString(R.string.progress_indicator_home_detail_label), true);
+        showProgressIndicator(this, getString(R.string.progress_indicator_home_label), getString(R.string.progress_indicator_home_detail_label), true);
         NetworkUtils.getBakingData(new Callback<List<BakingData>>() {
             @Override
             public void onResponse(@NonNull Call<List<BakingData>> call, @NonNull Response<List<BakingData>> response) {
@@ -103,12 +103,12 @@ public class RecipeListActivity extends AppCompatActivity implements RecipeListA
                 } else {
                     showToastMessage(getString(R.string.network_error));
                 }
-                //ProgressIndicatorHandler.hideProgressIndicator();
+                hideProgressIndicator();
             }
 
             @Override
             public void onFailure(@NonNull Call<List<BakingData>> call, @NonNull Throwable t) {
-                //ProgressIndicatorHandler.hideProgressIndicator();
+                hideProgressIndicator();
                 showToastMessage(t.getLocalizedMessage());
             }
         });
@@ -122,11 +122,36 @@ public class RecipeListActivity extends AppCompatActivity implements RecipeListA
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
+    public void showProgressIndicator(Context context, String titleLabel, String detailLabel, boolean isCancellable) {
+        if (context == null) {
+            return;
+        }
+
+        progressIndicator = KProgressHUD.create(context)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setCancellable(isCancellable)
+                .setAnimationSpeed(ANIMATION_SPEED)
+                .setDimAmount(DIMENSION)
+                .show();
+
+        if (titleLabel != null && !titleLabel.equals("")) {
+            progressIndicator.setLabel(titleLabel);
+        }
+
+        if (detailLabel != null && !detailLabel.equals("")) {
+            progressIndicator.setDetailsLabel(detailLabel);
+        }
+    }
+
+    public void hideProgressIndicator() {
+        progressIndicator.dismiss();
+    }
+
     @Override
     public void onRecipeItemClick(int clickedItemIndex) {
 
         Context context = RecipeListActivity.this;
-        Class destinationActivity = RecipeStepsMasterActivity.class;
+        Class destinationActivity = RecipeStepsListActivity.class;
         Intent intent = new Intent(context, destinationActivity);
         BakingData bakingData = this.bakingData.get(clickedItemIndex);
         intent.putExtra(Intent.EXTRA_TEXT, bakingData);

@@ -13,7 +13,7 @@ import com.chandan.android.bakingapp.model.RecipeStepsData;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecipeStepsDetailActivity extends AppCompatActivity {
+public class RecipeStepsDetailActivity extends AppCompatActivity implements RecipeDetailFragment.MediaPlayerStateListener {
 
     private List<RecipeStepsData> recipeStepsDataList = null;
     private Integer recipeStepCurrentPosition = 0;
@@ -52,5 +52,16 @@ public class RecipeStepsDetailActivity extends AppCompatActivity {
 
     private void showToastMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
+
+    // ExoPlayer Event Callbacks
+    @Override
+    public void onMediaPlayerError(String error) {
+        showToastMessage(error);
+    }
+
+    @Override
+    public void onMediaPlayerNoUrlAvailable() {
+        showToastMessage(getString(R.string.video_url_na));
     }
 }

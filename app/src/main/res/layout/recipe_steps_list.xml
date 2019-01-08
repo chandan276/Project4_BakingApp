@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="recipestepsdata"
+            type="com.chandan.android.bakingapp.model.RecipeStepsData" />
+
+        <variable
+            name="ingredientsdata"
+            type="com.chandan.android.bakingapp.model.IngredientsData" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/recipe_detail_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/recipe_steps_list_text_margin"
+            android:layout_marginEnd="@dimen/recipe_steps_list_text_right_margin"
+            android:layout_marginLeft="@dimen/recipe_steps_list_text_margin"
+            android:layout_marginRight="@dimen/recipe_steps_list_text_right_margin"
+            android:layout_marginBottom="@dimen/recipe_steps_list_text_margin"
+            android:textColor="@color/default_textColor"
+            android:textSize="@dimen/recipe_step_text_size" />
+
+        <TextView
+            android:id="@+id/recipe_detail_description_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/recipe_steps_list_text_margin"
+            android:layout_marginEnd="@dimen/recipe_steps_list_text_right_margin"
+            android:layout_marginLeft="@dimen/recipe_steps_list_text_margin"
+            android:layout_marginRight="@dimen/recipe_steps_list_text_right_margin"
+            android:layout_marginBottom="@dimen/recipe_steps_list_text_margin"
+            android:textColor="@color/subtitle_text_color"
+            android:textSize="@dimen/recipe_step_desc_size"
+            android:textStyle="italic"
+            android:layout_below="@id/recipe_detail_text_view"/>
+
+        <ImageView
+            android:id="@+id/navigation_image"
+            android:layout_width="@dimen/navigation_image_width"
+            android:layout_height="@dimen/navigation_image_height"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/recipe_steps_list_text_margin"
+            android:contentDescription="@string/navigation_image_description"
+            android:scaleType="centerCrop"
+            android:src="@drawable/right_arrow" />
+
+    </RelativeLayout>
+</layout>

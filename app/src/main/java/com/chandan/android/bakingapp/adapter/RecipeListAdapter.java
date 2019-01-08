@@ -56,7 +56,8 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
     public void onBindViewHolder(final RecipeViewHolder holder, final int position) {
         holder.binding.setBakingdata(recipeDataList.get(position));
 
-        String formattedText = "Servings: " + holder.binding.getBakingdata().getRecipeTotalServings();
+        String formattedText = holder.binding.getRoot().getContext().getString(R.string.servings_text)
+                + " " + holder.binding.getBakingdata().getRecipeTotalServings();
         holder.binding.recipeServingsTextView.setText(formattedText);
 
         holder.binding.recipeCardView.setOnClickListener(new View.OnClickListener() {

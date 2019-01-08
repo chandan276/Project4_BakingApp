@@ -18,6 +18,14 @@
     <dimen name="menu_dots_height">30dp</dimen>
     <dimen name="menu_top_margin">15dp</dimen>
 
+    <!--Recipe Steps List Dimen-->
+    <dimen name="recipe_steps_list_text_margin">10dp</dimen>
+    <dimen name="recipe_steps_list_text_right_margin">35dp</dimen>
+    <dimen name="navigation_image_width">20dp</dimen>
+    <dimen name="navigation_image_height">20dp</dimen>
+    <dimen name="recipe_step_text_size">16sp</dimen>
+    <dimen name="recipe_step_desc_size">13sp</dimen>
+
     <!--Recipe Steps Fragment TextView Dimen-->
     <dimen name="recipe_steps_Fragment_text_margin">15dp</dimen>
     <dimen name="recipe_steps_Fragment_text_size">15sp</dimen>

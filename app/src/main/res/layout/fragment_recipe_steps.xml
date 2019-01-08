@@ -23,7 +23,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/recipe_steps_Fragment_text_margin"
-            android:background="@drawable/rounded_corner"
             android:fontFamily="sans-serif"
             android:gravity="center"
             android:textColor="@color/default_textColor"

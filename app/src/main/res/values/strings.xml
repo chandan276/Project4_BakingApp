@@ -23,6 +23,7 @@
     <string name="video_preview_image_description">Video Preview Image</string>
     <string name="cardview_image_description">Recipe Image</string>
     <string name="cardview_menu_description">Menu Image</string>
+    <string name="navigation_image_description">Navigation Image</string>
 
     <!--Widget-->
     <string name="appwidget_text">EXAMPLE</string>
