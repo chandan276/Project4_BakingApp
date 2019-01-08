@@ -1,6 +1,7 @@
 package com.chandan.android.bakingapp.fragment;
 
 
+import android.app.Dialog;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.graphics.BitmapFactory;
@@ -10,15 +11,19 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.chandan.android.bakingapp.R;
 import com.chandan.android.bakingapp.databinding.FragmentRecipeDetailBinding;
 import com.chandan.android.bakingapp.model.RecipeStepsData;
+import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.ExoPlayer;
@@ -44,11 +49,22 @@ public class RecipeDetailFragment extends Fragment implements ExoPlayer.EventLis
 
     public static final String RECIPE_LIST_KEY = "recipe_list_key";
 
+    private final String STATE_PLAYER_FULLSCREEN = "playerFullscreen";
+    private final String STATE_RESUME_WINDOW = "resumeWindow";
+    private final String STATE_RESUME_POSITION = "resumePosition";
+
     private RecipeStepsData recipeStepsData = null;
     MediaPlayerStateListener mCallback;
 
     private SimpleExoPlayer mExoPlayer;
     private SimpleExoPlayerView mPlayerView;
+    private FrameLayout mFullScreenButton;
+    private ImageView mFullScreenIcon;
+    private boolean mExoPlayerFullscreen = false;
+    private Dialog mFullScreenDialog;
+
+    private int mResumeWindow;
+    private long mResumePosition;
 
     public interface MediaPlayerStateListener {
         void onMediaPlayerError(String error);
@@ -68,6 +84,9 @@ public class RecipeDetailFragment extends Fragment implements ExoPlayer.EventLis
 
         if (savedInstanceState != null) {
             recipeStepsData = savedInstanceState.getParcelable(RECIPE_LIST_KEY);
+            mExoPlayerFullscreen = savedInstanceState.getBoolean(STATE_PLAYER_FULLSCREEN);
+            mResumeWindow = savedInstanceState.getInt(STATE_RESUME_WINDOW);
+            mResumePosition = savedInstanceState.getLong(STATE_RESUME_POSITION);
         }
 
         FragmentRecipeDetailBinding binding = DataBindingUtil.inflate(
@@ -79,6 +98,16 @@ public class RecipeDetailFragment extends Fragment implements ExoPlayer.EventLis
         mPlayerView = binding.playerView;
         binding.playerView.setDefaultArtwork(BitmapFactory.decodeResource
                 (getResources(), R.drawable.play_button_image));
+
+        return rootView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        initFullscreenDialog();
+        initFullscreenButton();
 
         String mediaUrlStr = "";
         if (recipeStepsData.getStepVideoUrl() != null && !recipeStepsData.getStepVideoUrl().equals("")) {
@@ -93,12 +122,35 @@ public class RecipeDetailFragment extends Fragment implements ExoPlayer.EventLis
 
         initializePlayer(Uri.parse(mediaUrlStr));
 
-        return rootView;
+        if (mExoPlayerFullscreen) {
+            ((ViewGroup) mPlayerView.getParent()).removeView(mPlayerView);
+            mFullScreenDialog.addContentView(mPlayerView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            mFullScreenIcon.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_fullscreen_skrink));
+            mFullScreenDialog.show();
+        }
     }
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle currentState) {
         currentState.putParcelable(RECIPE_LIST_KEY, recipeStepsData);
+        currentState.putBoolean(STATE_PLAYER_FULLSCREEN, mExoPlayerFullscreen);
+        currentState.putInt(STATE_RESUME_WINDOW, mResumeWindow);
+        currentState.putLong(STATE_RESUME_POSITION, mResumePosition);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        if (mPlayerView != null && mPlayerView.getPlayer() != null) {
+            mResumeWindow = mPlayerView.getPlayer().getCurrentWindowIndex();
+            mResumePosition = Math.max(0, mPlayerView.getPlayer().getCurrentPosition());
+
+            mPlayerView.getPlayer().release();
+        }
+
+        if (mFullScreenDialog != null)
+            mFullScreenDialog.dismiss();
     }
 
     @Override
@@ -128,6 +180,12 @@ public class RecipeDetailFragment extends Fragment implements ExoPlayer.EventLis
             mExoPlayer = ExoPlayerFactory.newSimpleInstance(getContext(), trackSelector, loadControl);
             mPlayerView.setPlayer(mExoPlayer);
 
+            boolean haveResumePosition = mResumeWindow != C.INDEX_UNSET;
+
+            if (haveResumePosition) {
+                mPlayerView.getPlayer().seekTo(mResumeWindow, mResumePosition);
+            }
+
             mExoPlayer.addListener(this);
 
             String userAgent = Util.getUserAgent(getContext(), getContext().getString(R.string.app_name));
@@ -137,6 +195,53 @@ public class RecipeDetailFragment extends Fragment implements ExoPlayer.EventLis
             mExoPlayer.prepare(mediaSource);
             mExoPlayer.setPlayWhenReady(true);
         }
+    }
+
+    private void initFullscreenButton() {
+
+        PlaybackControlView controlView = mPlayerView.findViewById(R.id.exo_controller);
+        mFullScreenIcon = controlView.findViewById(R.id.exo_fullscreen_icon);
+        mFullScreenButton = controlView.findViewById(R.id.exo_fullscreen_button);
+        mFullScreenButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!mExoPlayerFullscreen)
+                    openFullscreenDialog();
+                else
+                    closeFullscreenDialog();
+            }
+        });
+    }
+
+    private void initFullscreenDialog() {
+
+        mFullScreenDialog = new Dialog(getContext(), android.R.style.Theme_Black_NoTitleBar_Fullscreen) {
+            public void onBackPressed() {
+                if (mExoPlayerFullscreen)
+                    closeFullscreenDialog();
+                super.onBackPressed();
+            }
+        };
+    }
+
+
+    private void openFullscreenDialog() {
+
+        ((ViewGroup) mPlayerView.getParent()).removeView(mPlayerView);
+        mFullScreenDialog.addContentView(mPlayerView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        mFullScreenIcon.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_fullscreen_skrink));
+        mExoPlayerFullscreen = true;
+        mFullScreenDialog.show();
+    }
+
+
+    private void closeFullscreenDialog() {
+
+        ((ViewGroup) mPlayerView.getParent()).removeView(mPlayerView);
+        //((FrameLayout) getView().findViewById(R.id.main_media_frame).
+        mExoPlayerFullscreen = false;
+        mFullScreenDialog.dismiss();
+        mFullScreenIcon.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_fullscreen_expand));
     }
 
     private void releasePlayer() {
