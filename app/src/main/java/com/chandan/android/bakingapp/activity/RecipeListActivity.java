@@ -13,7 +13,9 @@ import android.widget.Toast;
 import com.chandan.android.bakingapp.R;
 import com.chandan.android.bakingapp.adapter.RecipeListAdapter;
 import com.chandan.android.bakingapp.model.BakingData;
+import com.chandan.android.bakingapp.model.IngredientsData;
 import com.chandan.android.bakingapp.utilities.NetworkUtils;
+import com.chandan.android.bakingapp.widget.RecipeIngredientsService;
 import com.kaopiz.kprogresshud.KProgressHUD;
 
 import java.util.ArrayList;
@@ -51,6 +53,7 @@ public class RecipeListActivity extends AppCompatActivity implements RecipeListA
                 bakingData.clear();
                 bakingData = savedInstanceState.getParcelableArrayList(RESPONSE_CALLBACKS_TEXT_KEY);
                 updateAdapter();
+                onMenuItemClick(0);
             } else {
                 getBakingRecipeData();
             }
@@ -100,6 +103,7 @@ public class RecipeListActivity extends AppCompatActivity implements RecipeListA
                 if (response.body() != null) {
                     bakingData = response.body();
                     updateAdapter();
+                    onMenuItemClick(0);
                 } else {
                     showToastMessage(getString(R.string.network_error));
                 }
@@ -156,5 +160,26 @@ public class RecipeListActivity extends AppCompatActivity implements RecipeListA
         BakingData bakingData = this.bakingData.get(clickedItemIndex);
         intent.putExtra(Intent.EXTRA_TEXT, bakingData);
         startActivity(intent);
+    }
+
+    @Override
+    public void onMenuItemClick(int clickedItemIndex) {
+        BakingData bakingDataForWidget = bakingData.get(clickedItemIndex);
+        Integer ingredientsCount = 0;
+
+        String recipeName = bakingDataForWidget.getRecipeName();
+
+        StringBuilder ingredientsStrBuilder = new StringBuilder("");
+        for (IngredientsData ingredientsData: bakingDataForWidget.getRecipeIngredientsData()) {
+            ingredientsCount++;
+            String formattedString = Integer.toString(ingredientsCount) + ". " +
+                    ingredientsData.getIngredientsName() + ": "
+                    + Double.toString(ingredientsData.getIngredientsQuatity()) + " "
+                    + ingredientsData.getIngredientsMeasure() + "\n";
+
+            ingredientsStrBuilder.append(formattedString);
+        }
+
+        RecipeIngredientsService.startActionUpdateIngredientsWidgets(this, recipeName, ingredientsStrBuilder.toString());
     }
 }

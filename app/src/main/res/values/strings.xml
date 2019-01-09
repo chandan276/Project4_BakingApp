@@ -26,7 +26,9 @@
     <string name="navigation_image_description">Navigation Image</string>
 
     <!--Widget-->
-    <string name="appwidget_text">EXAMPLE</string>
+    <string name="appwidget_recipe_name_text">Recipe Name</string>
+    <string name="appwidget_ingredients_title_text">Ingredients:</string>
+    <string name="appwidget_ingredients_content_text">Ingredients List</string>
     <string name="add_widget">Add widget</string>
 
 </resources>

@@ -30,6 +30,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
 
     public interface RecipeItemClickListener {
         void onRecipeItemClick(int clickedItemIndex);
+        void onMenuItemClick(int clickedItemIndex);
     }
 
     public RecipeListAdapter(RecipeItemClickListener listener) {
@@ -72,7 +73,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         holder.binding.cardMenuImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showPopupMenu(holder.binding.cardMenuImage);
+                showPopupMenu(holder.binding.cardMenuImage, position);
             }
         });
     }
@@ -82,23 +83,29 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         return recipeDataList.size();
     }
 
-    private void showPopupMenu(View view) {
+    private void showPopupMenu(View view, int position) {
         // inflate menu
         PopupMenu popup = new PopupMenu(view.getContext(), view);
         MenuInflater inflater = popup.getMenuInflater();
         inflater.inflate(R.menu.card_menu, popup.getMenu());
-        popup.setOnMenuItemClickListener(new MenuItemClickListener());
+        popup.setOnMenuItemClickListener(new MenuItemClickListener(position));
         popup.show();
     }
 
     class MenuItemClickListener implements PopupMenu.OnMenuItemClickListener {
 
-        MenuItemClickListener() { }
+        private int menuPosition;
+
+        MenuItemClickListener(int position) {
+            this.menuPosition = position;
+        }
 
         @Override
         public boolean onMenuItemClick(MenuItem menuItem) {
             if (menuItem.getItemId() == R.id.action_card_menu) {
-                //TODO: Show ingredients in Widget
+                if (mOnClickListener != null) {
+                    mOnClickListener.onMenuItemClick(menuPosition);
+                }
                 return true;
             }
             return false;
