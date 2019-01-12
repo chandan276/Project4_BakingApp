@@ -4,12 +4,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
+import android.support.test.espresso.IdlingResource;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
+import com.chandan.android.bakingapp.IdlingResource.SimpleIdlingResource;
 import com.chandan.android.bakingapp.R;
 import com.chandan.android.bakingapp.adapter.RecipeListAdapter;
 import com.chandan.android.bakingapp.model.BakingData;
@@ -38,6 +42,18 @@ public class RecipeListActivity extends AppCompatActivity implements RecipeListA
     private KProgressHUD progressIndicator;
 
     private static final String RESPONSE_CALLBACKS_TEXT_KEY = "callbacks";
+
+    @Nullable
+    private SimpleIdlingResource mIdlingResource;
+
+    @VisibleForTesting
+    @NonNull
+    public IdlingResource getIdlingResource() {
+        if (mIdlingResource == null) {
+            mIdlingResource = new SimpleIdlingResource();
+        }
+        return mIdlingResource;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +112,11 @@ public class RecipeListActivity extends AppCompatActivity implements RecipeListA
     }
 
     private void getBakingRecipeData() {
-        showProgressIndicator(this, getString(R.string.progress_indicator_home_label), getString(R.string.progress_indicator_home_detail_label), true);
+        if (mIdlingResource != null) {
+            mIdlingResource.setIdleState(false);
+        }
+
+        //showProgressIndicator(this, getString(R.string.progress_indicator_home_label), getString(R.string.progress_indicator_home_detail_label), true);
         NetworkUtils.getBakingData(new Callback<List<BakingData>>() {
             @Override
             public void onResponse(@NonNull Call<List<BakingData>> call, @NonNull Response<List<BakingData>> response) {
@@ -107,13 +127,21 @@ public class RecipeListActivity extends AppCompatActivity implements RecipeListA
                 } else {
                     showToastMessage(getString(R.string.network_error));
                 }
-                hideProgressIndicator();
+                //hideProgressIndicator();
+
+                if (mIdlingResource != null) {
+                    mIdlingResource.setIdleState(true);
+                }
             }
 
             @Override
             public void onFailure(@NonNull Call<List<BakingData>> call, @NonNull Throwable t) {
-                hideProgressIndicator();
+                //hideProgressIndicator();
                 showToastMessage(t.getLocalizedMessage());
+
+                if (mIdlingResource != null) {
+                    mIdlingResource.setIdleState(true);
+                }
             }
         });
     }
