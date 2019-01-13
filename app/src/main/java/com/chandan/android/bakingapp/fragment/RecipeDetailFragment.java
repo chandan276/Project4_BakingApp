@@ -1,17 +1,14 @@
 package com.chandan.android.bakingapp.fragment;
 
 
-import android.app.Dialog;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;

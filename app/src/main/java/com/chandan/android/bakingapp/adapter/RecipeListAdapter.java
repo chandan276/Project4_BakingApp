@@ -1,18 +1,15 @@
 package com.chandan.android.bakingapp.adapter;
 
-import android.content.Context;
-import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
-import android.support.annotation.NonNull;
+
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupMenu;
-import android.widget.TextView;
 
 import com.chandan.android.bakingapp.R;
 import com.chandan.android.bakingapp.databinding.RecipeListCardviewBinding;

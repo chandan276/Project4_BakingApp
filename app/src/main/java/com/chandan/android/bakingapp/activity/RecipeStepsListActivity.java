@@ -3,16 +3,17 @@ package com.chandan.android.bakingapp.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.chandan.android.bakingapp.R;
-import com.chandan.android.bakingapp.adapter.RecipeListAdapter;
 import com.chandan.android.bakingapp.adapter.RecipeStepsListAdapter;
 import com.chandan.android.bakingapp.fragment.RecipeDetailFragment;
 import com.chandan.android.bakingapp.model.BakingData;
@@ -41,6 +42,13 @@ public class RecipeStepsListActivity extends AppCompatActivity implements Recipe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_steps_list);
 
+        ActionBar actionBar = this.getSupportActionBar();
+
+        // Set the action bar back button to look like an up button
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+
         if (savedInstanceState != null) {
             if (savedInstanceState.containsKey(BAKING_DATA_KEY)) {
                 bakingData = savedInstanceState.getParcelable(BAKING_DATA_KEY);
@@ -56,6 +64,15 @@ public class RecipeStepsListActivity extends AppCompatActivity implements Recipe
         if (bakingData != null) {
             populateUI();
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            NavUtils.navigateUpFromSameTask(this);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -96,6 +113,7 @@ public class RecipeStepsListActivity extends AppCompatActivity implements Recipe
                 detailsFragment.setRecipeStepsData(stepsData);
                 fragmentManagerDetail.beginTransaction()
                         .add(R.id.root_layout_detail, detailsFragment)
+                        .addToBackStack(null)
                         .commit();
             }
         } else {
@@ -138,6 +156,7 @@ public class RecipeStepsListActivity extends AppCompatActivity implements Recipe
             detailsFragment.setRecipeStepsData(stepsDataList.get(selectedStep));
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.root_layout_detail, detailsFragment)
+                    .addToBackStack(null)
                     .commit();
         } else {
             Context context = RecipeStepsListActivity.this;
