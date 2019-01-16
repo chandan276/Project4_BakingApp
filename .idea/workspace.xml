@@ -7,23 +7,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="48860d19-47e9-43ff-9561-76632eb25971" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/chandan/android/bakingapp/activity/RecipeListActivityTest.java" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/resourceHashesCache.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/resourceHashesCache.bin" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.bin" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" />
-      <change beforePath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/chandan/android/bakingapp/RecipeListActivityTest.java" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/chandan/android/bakingapp/RecipeListActivityTest.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/chandan/android/bakingapp/activity/RecipeStepsDetailActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chandan/android/bakingapp/activity/RecipeStepsDetailActivity.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/chandan/android/bakingapp/activity/RecipeStepsListActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chandan/android/bakingapp/activity/RecipeStepsListActivity.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/chandan/android/bakingapp/adapter/RecipeListAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chandan/android/bakingapp/adapter/RecipeListAdapter.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/chandan/android/bakingapp/adapter/RecipeStepsListAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chandan/android/bakingapp/adapter/RecipeStepsListAdapter.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/chandan/android/bakingapp/fragment/RecipeDetailFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chandan/android/bakingapp/fragment/RecipeDetailFragment.java" />
+      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/chandan/android/bakingapp/activity/RecipeListActivityTest.java" afterPath="" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -36,6 +27,44 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$/app">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Project4_BakingApp" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Project4_BakingApp" type="f1a62948:ProjectNode" />
+                <item name=":app" type="2d1252cf:ModuleNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Project4_BakingApp" type="f1a62948:ProjectNode" />
+                <item name=":app" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Project4_BakingApp" type="f1a62948:ProjectNode" />
+                <item name=":app" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
   </component>
   <component name="FileEditorManager">
     <leaf>
@@ -97,21 +126,9 @@
       <file leaf-file-name="RecipeListActivityTest.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/androidTest/java/com/chandan/android/bakingapp/RecipeListActivityTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="50" column="0" lean-forward="true" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+            <state relative-caret-position="90">
+              <caret line="44" column="0" lean-forward="true" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RecipeListActivityTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/androidTest/java/com/chandan/android/bakingapp/activity/RecipeListActivityTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="537">
-              <caret line="72" column="5" lean-forward="false" selection-start-line="37" selection-start-column="4" selection-end-line="72" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -2334,13 +2351,6 @@
             <path>
               <item name="Project4_BakingApp" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="bakingapp" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="activity" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Project4_BakingApp" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="res" type="d4f16f75:AndroidResFolderNode" />
             </path>
             <path>
@@ -2376,7 +2386,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Android Instrumented Tests.testRecipeStepVide...()">
+  <component name="RunManager" selected="Android Instrumented Tests.RecipeListActivityTest">
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -2445,55 +2455,11 @@
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
     </configuration>
-    <configuration name="recipeListActivity...() (1)" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests" temporary="true" nameIsGenerated="true">
+    <configuration name="RecipeListActivityTest" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests" temporary="true" nameIsGenerated="true">
       <module name="app" />
-      <option name="TESTING_TYPE" value="3" />
+      <option name="TESTING_TYPE" value="2" />
       <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
-      <option name="METHOD_NAME" value="recipeListActivityTest" />
-      <option name="CLASS_NAME" value="com.chandan.android.bakingapp.activity.RecipeListActivityTest" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="EXTRA_OPTIONS" value="" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
-      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
-      <option name="FORCE_STOP_RUNNING_APP" value="true" />
-      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
-      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
-      <option name="DEBUGGER_TYPE" value="Auto" />
-      <Auto>
-        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
-        <option name="SHOW_STATIC_VARS" value="true" />
-        <option name="WORKING_DIR" value="" />
-        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
-        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
-      </Auto>
-      <Hybrid>
-        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
-        <option name="SHOW_STATIC_VARS" value="true" />
-        <option name="WORKING_DIR" value="" />
-        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
-        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
-      </Hybrid>
-      <Java />
-      <Native>
-        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
-        <option name="SHOW_STATIC_VARS" value="true" />
-        <option name="WORKING_DIR" value="" />
-        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
-        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
-      </Native>
-      <Profilers>
-        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
-      </Profilers>
-    </configuration>
-    <configuration name="testRecipeItemNavi...()" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests" temporary="true" nameIsGenerated="true">
-      <module name="app" />
-      <option name="TESTING_TYPE" value="3" />
-      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
-      <option name="METHOD_NAME" value="testRecipeItemNavigation" />
+      <option name="METHOD_NAME" value="" />
       <option name="CLASS_NAME" value="com.chandan.android.bakingapp.RecipeListActivityTest" />
       <option name="PACKAGE_NAME" value="" />
       <option name="EXTRA_OPTIONS" value="" />
@@ -2679,6 +2645,24 @@
       <module name="" />
       <envs />
     </configuration>
+    <configuration name="Project4_BakingApp:app [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/app" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="clean" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+    </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
@@ -2733,19 +2717,19 @@
     </configuration>
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Android App.app" />
-      <item index="1" class="java.lang.String" itemvalue="Android Instrumented Tests.recipeListActivity...() (1)" />
-      <item index="2" class="java.lang.String" itemvalue="Android Instrumented Tests.testRecipeItemNavi...()" />
-      <item index="3" class="java.lang.String" itemvalue="Android Instrumented Tests.testRecipeStepsSel...()" />
-      <item index="4" class="java.lang.String" itemvalue="Android Instrumented Tests.testWidgetMenuSele...()" />
-      <item index="5" class="java.lang.String" itemvalue="Android Instrumented Tests.testRecipeStepVide...()" />
+      <item index="1" class="java.lang.String" itemvalue="Android Instrumented Tests.testRecipeStepsSel...()" />
+      <item index="2" class="java.lang.String" itemvalue="Android Instrumented Tests.testWidgetMenuSele...()" />
+      <item index="3" class="java.lang.String" itemvalue="Android Instrumented Tests.testRecipeStepVide...()" />
+      <item index="4" class="java.lang.String" itemvalue="Gradle.Project4_BakingApp:app [clean]" />
+      <item index="5" class="java.lang.String" itemvalue="Android Instrumented Tests.RecipeListActivityTest" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Android Instrumented Tests.testRecipeStepVide...()" />
-        <item index="1" class="java.lang.String" itemvalue="Android Instrumented Tests.testWidgetMenuSele...()" />
-        <item index="2" class="java.lang.String" itemvalue="Android Instrumented Tests.testRecipeStepsSel...()" />
-        <item index="3" class="java.lang.String" itemvalue="Android Instrumented Tests.testRecipeItemNavi...()" />
-        <item index="4" class="java.lang.String" itemvalue="Android Instrumented Tests.recipeListActivity...() (1)" />
+        <item index="0" class="java.lang.String" itemvalue="Android Instrumented Tests.RecipeListActivityTest" />
+        <item index="1" class="java.lang.String" itemvalue="Gradle.Project4_BakingApp:app [clean]" />
+        <item index="2" class="java.lang.String" itemvalue="Android Instrumented Tests.testRecipeStepVide...()" />
+        <item index="3" class="java.lang.String" itemvalue="Android Instrumented Tests.testWidgetMenuSele...()" />
+        <item index="4" class="java.lang.String" itemvalue="Android Instrumented Tests.testRecipeStepsSel...()" />
       </list>
     </recent_temporary>
   </component>
@@ -2769,6 +2753,9 @@
     <history-entry file="RecipeListActivityTest - 2019.01.13 at 18h 20m 02s.xml">
       <configuration name="RecipeListActivityTest" configurationId="AndroidTestRunConfigurationType" />
     </history-entry>
+    <history-entry file="RecipeListActivityTest - 2019.01.13 at 19h 29m 29s.xml">
+      <configuration name="RecipeListActivityTest" configurationId="AndroidTestRunConfigurationType" />
+    </history-entry>
     <history-entry file="recipeListActivity___() - 2019.01.13 at 18h 21m 39s.xml">
       <configuration name="recipeListActivity...()" configurationId="AndroidTestRunConfigurationType" />
     </history-entry>
@@ -2783,9 +2770,6 @@
     </history-entry>
     <history-entry file="testRecipeStepsSel___() - 2019.01.13 at 18h 44m 22s.xml">
       <configuration name="testRecipeStepsSel...()" configurationId="AndroidTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="testTextViewExists() - 2019.01.13 at 18h 15m 53s.xml">
-      <configuration name="testTextViewExists()" configurationId="AndroidTestRunConfigurationType" />
     </history-entry>
     <history-entry file="testTextViewExists() - 2019.01.13 at 18h 17m 34s.xml">
       <configuration name="testTextViewExists()" configurationId="AndroidTestRunConfigurationType" />
@@ -2818,7 +2802,7 @@
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24959612" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32970452" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32956383" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39968896" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -3038,16 +3022,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="537">
           <caret line="72" column="5" lean-forward="false" selection-start-line="37" selection-start-column="4" selection-end-line="72" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/androidTest/java/com/chandan/android/bakingapp/RecipeListActivityTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="50" column="0" lean-forward="true" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+        <state relative-caret-position="90">
+          <caret line="44" column="0" lean-forward="true" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
           <folding />
         </state>
       </provider>
